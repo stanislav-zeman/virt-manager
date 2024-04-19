@@ -1,0 +1,20 @@
+run:
+  timeout: 5m
+  tests: true
+  allow-parallel-runners: true
+  allow-serial-runners: true
+
+linters:
+  enable-all: true
+  disable:
+    - forbidigo
+    - scopelint
+    - maligned
+    - varcheck
+    - structcheck
+    - interfacer
+    - exhaustivestruct
+    - golint
+    - nosnakecase
+    - deadcode
+    - ifshort
