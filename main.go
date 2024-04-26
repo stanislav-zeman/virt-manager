@@ -4,33 +4,38 @@ import (
 	"embed"
 
 	"github.com/stanislav-zeman/virt-manager/internal/app"
+	"github.com/stanislav-zeman/virt-manager/internal/config"
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 )
 
+const configPath = "config/app.yaml"
+
 //go:embed all:frontend/dist
 var assets embed.FS
 
 func main() {
-	// Create an instance of the app structure
+	conf := config.Parse(configPath)
 	app := app.New()
-
-	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "myproject",
-		Width:  1024,
-		Height: 768,
+		Title:  conf.App.Title,
+		Width:  conf.App.Width,
+		Height: conf.App.Height,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
-		OnStartup:        app.Startup,
+		BackgroundColour: &options.RGBA{
+			R: conf.App.Background.Colour.Red,
+			G: conf.App.Background.Colour.Green,
+			B: conf.App.Background.Colour.Blue,
+			A: conf.App.Background.Colour.Alpha,
+		},
+		OnStartup: app.Startup,
 		Bind: []interface{}{
 			app,
 		},
 	})
-
 	if err != nil {
 		println("Error:", err.Error())
 	}

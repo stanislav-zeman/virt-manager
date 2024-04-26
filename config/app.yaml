@@ -1,0 +1,10 @@
+app:
+  title: "Hello"
+  height: 1024
+  width: 768
+  background:
+    colour:
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 0
