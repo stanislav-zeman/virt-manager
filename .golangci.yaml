@@ -20,3 +20,9 @@ linters:
     - nosnakecase
     - deadcode
     - ifshort
+    # restrictive
+    - exhaustruct
+    - depguard
+    - nlreturn
+    - containedctx
+    - wsl
