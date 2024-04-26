@@ -3,6 +3,10 @@ lint:
 	mkdir -p frontend/dist && touch frontend/dist/dummy
 	golangci-lint run
 
+.PHONY: generate
+generate:
+	wails generate module
+
 .PHONY: dev
 dev:
 	wails dev
