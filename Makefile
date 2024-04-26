@@ -1,6 +1,6 @@
 .PHONY: lint
 lint:
-	mkdir -p frontend/dist
+	mkdir -p frontend/dist && touch frontend/dist/dummy
 	golangci-lint run
 
 .PHONY: dev
