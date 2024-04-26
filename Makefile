@@ -1,16 +1,16 @@
-.PHONY:
+.PHONY: lint
 lint:
 	golangci-lint run
 
-.PHONY:
+.PHONY: dev
 dev:
 	wails dev
 
-.PHONY:
+.PHONY: build
 build:
 	wails build
 
-.PHONY:
+.PHONY: test
 test:
 	go test -cover -coverprofile cover.out .../.
 
