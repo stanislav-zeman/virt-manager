@@ -19,6 +19,9 @@ jobs:
       - name: Go version
         run: go version
 
+      - name: Debug
+        run: ls && ls frontend && ls frontend/dist
+
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
         with:
