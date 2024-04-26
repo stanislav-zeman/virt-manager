@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build
-        run: go build cmd/virt-manager/main.go
+        run: go build .
 
   test:
     needs: build
