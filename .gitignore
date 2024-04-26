@@ -1,7 +1,7 @@
 bin
 build/bin
 node_modules
-frontend/dist
+frontend/dist/*
 
 # MacOS
 .DS_Store
