@@ -3,6 +3,8 @@ package app
 import (
 	"context"
 	"fmt"
+
+	"github.com/stanislav-zeman/virt-manager/internal/domain"
 )
 
 type App struct {
@@ -22,4 +24,21 @@ func (a *App) Startup(ctx context.Context) {
 // Greet returns a greeting for the given name.
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
+func (a *App) Domains() []domain.Domain {
+	return []domain.Domain{
+		{
+			Name:   "prettyCoolVM",
+			Status: "running",
+		},
+		{
+			Name:   "notSoCoolVM",
+			Status: "suspended",
+		},
+		{
+			Name:   "nobodyCaresVM",
+			Status: "stopped",
+		},
+	}
 }

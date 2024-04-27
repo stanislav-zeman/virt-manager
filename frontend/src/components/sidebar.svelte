@@ -1,19 +1,19 @@
-<script>
+<script lang="ts">
     import {
         Sidebar,
         SidebarGroup,
         SidebarItem,
         SidebarWrapper,
     } from "flowbite-svelte";
-    import { ChartPieSolid, UserSettingsSolid } from "flowbite-svelte-icons";
+    import { DesktopPcSolid, UserSettingsSolid } from "flowbite-svelte-icons";
 </script>
 
-<Sidebar class="h-full">
+<Sidebar class="w-1/5">
     <SidebarWrapper class="h-full">
         <SidebarGroup>
-            <SidebarItem label="Dashboard">
+            <SidebarItem label="Domains">
                 <svelte:fragment slot="icon">
-                    <ChartPieSolid
+                    <DesktopPcSolid
                         class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     />
                 </svelte:fragment>

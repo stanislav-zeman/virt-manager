@@ -1,15 +1,9 @@
 <script lang="ts">
-    import { Greet } from "../wailsjs/go/app/App.js";
     import Sidebar from "./components/sidebar.svelte";
-
-    let resultText: string = "Please enter your name below 👇";
-    let name: string;
-
-    function greet(): void {
-        Greet(name).then((result) => (resultText = result));
-    }
+    import Domains from "./pages/domains.svelte";
 </script>
 
-<main class="h-full">
+<main class="w-full h-full flex">
     <Sidebar />
+    <Domains />
 </main>
