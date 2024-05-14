@@ -5,10 +5,12 @@ import (
 	"fmt"
 
 	"github.com/stanislav-zeman/virt-manager/internal/domain"
+	"github.com/stanislav-zeman/virt-manager/internal/libvirt"
 )
 
 type App struct {
 	ctx context.Context
+	lv  libvirt.Libvirt
 }
 
 func New() *App {
@@ -41,4 +43,14 @@ func (a *App) Domains() []domain.Domain {
 			Status: "stopped",
 		},
 	}
+}
+
+func (a *App) Connect(URI string) error {
+	lv, err := libvirt.New(URI)
+	if err != nil {
+		return err
+	}
+
+	a.lv = lv
+	return nil
 }
