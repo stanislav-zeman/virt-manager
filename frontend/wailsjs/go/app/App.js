@@ -9,7 +9,3 @@ export function Connect(arg1) {
 export function Domains() {
   return window['go']['app']['App']['Domains']();
 }
-
-export function Greet(arg1) {
-  return window['go']['app']['App']['Greet'](arg1);
-}

@@ -6,25 +6,19 @@ import (
 	"libvirt.org/go/libvirt"
 )
 
-const defaultURI = "qemu:///session"
-
-// Libvirt is a facade for interacting with the Libvirt API.
-type Libvirt struct {
+// Facade is a facade for interacting with the Facade API.
+type Facade struct {
 	conn *libvirt.Connect
 }
 
-func New(URI string) (lv Libvirt, err error) {
-	if URI == "" {
-		URI = defaultURI
-	}
-
+func New(URI string) (lv *Facade, err error) {
 	conn, err := libvirt.NewConnect(URI)
 	if err != nil {
 		err = fmt.Errorf("could not connect to hypervisor: %w", err)
 		return
 	}
 
-	lv = Libvirt{
+	lv = &Facade{
 		conn: conn,
 	}
 	return

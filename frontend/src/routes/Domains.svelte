@@ -1,7 +1,6 @@
 <script lang="ts">
     import Window from "../layout/Window.svelte";
     import { Domains } from "../../wailsjs/go/app/App";
-    import { Greet } from "../../wailsjs/go/app/App";
     import { Button } from "flowbite-svelte";
     import Domain from "../components/Domain.svelte";
 </script>

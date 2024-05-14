@@ -5,6 +5,7 @@
     import Router from "svelte-spa-router";
     import { wrap } from "svelte-spa-router/wrap";
     import NotFound from "./routes/NotFound.svelte";
+    import Notifications from "svelte-notifications";
     const routes = {
         "/": Home,
         "/domains": wrap({
@@ -16,6 +17,8 @@
 </script>
 
 <main class="w-full h-full flex">
-    <Sidebar />
-    <Router {routes} />
+    <Notifications>
+        <Sidebar />
+        <Router {routes} />
+    </Notifications>
 </main>

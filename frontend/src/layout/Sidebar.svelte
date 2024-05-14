@@ -4,6 +4,7 @@
         SidebarGroup,
         SidebarItem,
         SidebarWrapper,
+        Heading,
     } from "flowbite-svelte";
     import {
         DesktopPcSolid,
@@ -14,7 +15,7 @@
 
 <Sidebar class="w-1/5">
     <SidebarWrapper class="h-full">
-        <div>lol</div>
+        <Heading tag="h4" class="my-2 text-gray-600">virt-manager</Heading>
         <SidebarGroup>
             <SidebarItem label="Home" href="#/">
                 <svelte:fragment slot="icon">

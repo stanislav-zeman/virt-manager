@@ -27,6 +27,7 @@
         "vite": "^5.2.10"
     },
     "dependencies": {
+        "svelte-notifications": "^0.9.98",
         "svelte-spa-router": "^4.0.1"
     }
 }
