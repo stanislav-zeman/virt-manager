@@ -5,6 +5,7 @@ go 1.22.2
 require (
 	github.com/wailsapp/wails/v2 v2.8.1
 	gopkg.in/yaml.v3 v3.0.1
+	libvirt.org/go/libvirt v1.10003.0
 )
 
 require (
