@@ -1,13 +1,15 @@
 <script lang="ts">
     import Sidebar from "./layout/Sidebar.svelte";
     import Home from "./routes/Home.svelte";
-    import Domains from "./routes/Domains.svelte";
     import Settings from "./routes/Settings.svelte";
     import Router from "svelte-spa-router";
+    import { wrap } from "svelte-spa-router/wrap";
     import NotFound from "./routes/NotFound.svelte";
     const routes = {
         "/": Home,
-        "/domains": Domains,
+        "/domains": wrap({
+            asyncComponent: () => import("./routes/Domains.svelte"),
+        }),
         "/settings": Settings,
         "*": NotFound,
     };

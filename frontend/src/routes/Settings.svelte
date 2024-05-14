@@ -1,3 +1,5 @@
-<div class="w-4/5">
-    <div>Settings!</div>
-</div>
+<script>
+    import Window from "../layout/Window.svelte";
+</script>
+
+<Window heading="Settings" />
