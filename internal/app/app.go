@@ -27,36 +27,28 @@ func (a *App) Startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-func (a *App) Domains() (domains []domain.Domain, err error) {
+func (a *App) Shutdown(ctx context.Context) {
+	a.lv.Shutdown()
+}
+
+func (a *App) Domains() ([]domain.Domain, error) {
 	a.log.Info("fetching domains")
 	if a.lv == nil {
-		err = errors.New("No connection to a hypervisor was made. Did you specify the URI in the settings tab?")
-		return
+		return nil, errors.New("no connection set up")
 	}
 
-	return []domain.Domain{
-		{
-			Name:   "prettyCoolVM",
-			Status: "running",
-		},
-		{
-			Name:   "notSoCoolVM",
-			Status: "suspended",
-		},
-		{
-			Name:   "nobodyCaresVM",
-			Status: "stopped",
-		},
-	}, nil
+	return a.lv.Domains()
 }
 
 func (a *App) Connect(URI string) error {
 	if URI == "" {
-		a.log.Error("blank URI provided")
-		return errors.New("Blank URI is invalid!")
+		err := errors.New("blank URI provided")
+		a.log.Error("invalid URI",
+			zap.Error(err),
+		)
+		return err
 	}
 
-	a.log.Info("establishing new connection")
 	lv, err := libvirt.New(URI)
 	if err != nil {
 		a.log.Error("could not connect to hypervisor",
@@ -74,5 +66,9 @@ func (a *App) Connect(URI string) error {
 }
 
 func (a *App) Connected() bool {
-	return a.lv != nil
+	connected := a.lv != nil
+	a.log.Info("retrieved connection status",
+		zap.Bool("connected", connected),
+	)
+	return connected
 }

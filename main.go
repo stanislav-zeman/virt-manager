@@ -31,7 +31,8 @@ func main() {
 			B: conf.App.Background.Colour.Blue,
 			A: conf.App.Background.Colour.Alpha,
 		},
-		OnStartup: app.Startup,
+		OnStartup:  app.Startup,
+		OnShutdown: app.Shutdown,
 		Bind: []interface{}{
 			app,
 		},
