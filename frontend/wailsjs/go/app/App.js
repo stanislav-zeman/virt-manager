@@ -6,6 +6,10 @@ export function Connect(arg1) {
   return window['go']['app']['App']['Connect'](arg1);
 }
 
+export function Connected() {
+  return window['go']['app']['App']['Connected']();
+}
+
 export function Domains() {
   return window['go']['app']['App']['Domains']();
 }

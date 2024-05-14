@@ -72,3 +72,7 @@ func (a *App) Connect(URI string) error {
 	a.lv = lv
 	return nil
 }
+
+func (a *App) Connected() bool {
+	return a.lv != nil
+}

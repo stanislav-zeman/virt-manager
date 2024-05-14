@@ -4,4 +4,6 @@ import {domain} from '../models';
 
 export function Connect(arg1:string):Promise<void>;
 
+export function Connected():Promise<boolean>;
+
 export function Domains():Promise<Array<domain.Domain>>;
