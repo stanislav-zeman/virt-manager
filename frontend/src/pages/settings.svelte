@@ -1,4 +1,6 @@
-<script lang="ts">
-</script>
+<!-- <script lang="ts"> -->
+<!-- </script> -->
 
-<div></div>
+<div class="w-4/5">
+    <div>Settings!</div>
+</div>

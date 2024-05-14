@@ -5,14 +5,15 @@
 </script>
 
 <div class="w-4/5">
-    <div>
-        {#await Domains() then dss}
-            {#each dss as d}
-                <Domain name={d.name} status={d.status} />
-            {/each}
-        {/await}
-    </div>
-    <div class="justify-start">
-        <Button on:click{domains()}>Refresh</Button>
-    </div>
+    <div>Domains!</div>
+    <!-- <div> -->
+    <!--     {#await Domains() then dss} -->
+    <!--         {#each dss as d} -->
+    <!--             <Domain name={d.name} status={d.status} /> -->
+    <!--         {/each} -->
+    <!--     {/await} -->
+    <!-- </div> -->
+    <!-- <div class="justify-start"> -->
+    <!--     <Button on:click{domains()}>Refresh</Button> -->
+    <!-- </div> -->
 </div>
