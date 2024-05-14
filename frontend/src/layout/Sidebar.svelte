@@ -5,12 +5,24 @@
         SidebarItem,
         SidebarWrapper,
     } from "flowbite-svelte";
-    import { DesktopPcSolid, UserSettingsSolid } from "flowbite-svelte-icons";
+    import {
+        DesktopPcSolid,
+        HomeSolid,
+        UserSettingsSolid,
+    } from "flowbite-svelte-icons";
 </script>
 
 <Sidebar class="w-1/5">
     <SidebarWrapper class="h-full">
+        <div>lol</div>
         <SidebarGroup>
+            <SidebarItem label="Home" href="#/">
+                <svelte:fragment slot="icon">
+                    <HomeSolid
+                        class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    />
+                </svelte:fragment>
+            </SidebarItem>
             <SidebarItem label="Domains" href="#/domains">
                 <svelte:fragment slot="icon">
                     <DesktopPcSolid

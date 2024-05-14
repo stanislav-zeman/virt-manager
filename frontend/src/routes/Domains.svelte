@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Domains } from "../../wailsjs/go/app/App";
     import { Button } from "flowbite-svelte";
-    import Domain from "../components/domain.svelte";
+    import Domain from "../components/Domain.svelte";
 </script>
 
 <div class="w-4/5">
