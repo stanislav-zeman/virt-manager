@@ -27,8 +27,8 @@ func (a *App) Startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-func (a *App) Shutdown(ctx context.Context) {
-	a.lv.Shutdown()
+func (a *App) Close(ctx context.Context) {
+	a.lv.Close()
 }
 
 func (a *App) Domains() ([]domain.Domain, error) {
@@ -71,4 +71,24 @@ func (a *App) Connected() bool {
 		zap.Bool("connected", connected),
 	)
 	return connected
+}
+
+func (a *App) Create(domainName string, vCPUs uint, memory uint64) error {
+	return a.lv.Create(domainName, vCPUs, memory)
+}
+
+func (a *App) Suspend(domainName string) error {
+	return a.lv.Suspend(domainName)
+}
+
+func (a *App) Resume(domainName string) error {
+	return a.lv.Resume(domainName)
+}
+
+func (a *App) Shutdown(domainName string) error {
+	return a.lv.Destroy(domainName)
+}
+
+func (a *App) Destroy(domainName string) error {
+	return a.lv.Destroy(domainName)
 }

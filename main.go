@@ -32,7 +32,7 @@ func main() {
 			A: conf.App.Background.Colour.Alpha,
 		},
 		OnStartup:  app.Startup,
-		OnShutdown: app.Shutdown,
+		OnShutdown: app.Close,
 		Bind: []interface{}{
 			app,
 		},
