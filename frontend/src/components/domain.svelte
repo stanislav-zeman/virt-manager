@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Modal } from "flowbite-svelte";
+    import { Label, Input, Button, Modal } from "flowbite-svelte";
     import {
         Start,
         Resume,
@@ -12,12 +12,10 @@
     import { createEventDispatcher } from "svelte";
     import { getNotificationsContext } from "svelte-notifications";
     import { FloppyDiskSolid } from "flowbite-svelte-icons";
-    import DiskModal from "./DiskModal.svelte";
 
     const { addNotification } = getNotificationsContext();
     const dispatch = createEventDispatcher();
 
-    let diskModal = false;
     export let name: string;
     export let status: string;
     async function start() {
@@ -85,6 +83,38 @@
             });
         }
     }
+
+    let diskModal = false;
+    let diskType: string;
+    let diskDevice: string;
+    let path: string;
+    let target: string;
+    async function attach() {
+        try {
+            await AttachDevice(name, diskType, diskDevice, path, target);
+            dispatch("domain-changed");
+        } catch {
+            addNotification({
+                text: "Could not attach the device",
+                position: "bottom-right",
+                type: "error",
+                removeAfter: 5000,
+            });
+        }
+    }
+    async function detach() {
+        try {
+            await DetachDevice(name, diskType, diskDevice, path, target);
+            dispatch("domain-changed");
+        } catch {
+            addNotification({
+                text: "Could not detach the device",
+                position: "bottom-right",
+                type: "error",
+                removeAfter: 5000,
+            });
+        }
+    }
 </script>
 
 <div
@@ -112,12 +142,69 @@
             <Button class="mx-1" on:click={shutdown}>Shutdown</Button>
             <Button class="mx-1" color="red" on:click={destroy}>Destroy</Button>
         {/if}
-
         {#if status === "Running"}
             <Button class="!p-2 mx-1" on:click={() => (diskModal = true)}
                 ><FloppyDiskSolid class="w-6 h-6" /></Button
             >
-            <DiskModal domain={name} {diskModal} />
+
+            <Modal
+                title="Disk Management"
+                size="lg"
+                bind:open={diskModal}
+                autoclose
+            >
+                <form class="flex-col my-6 w-full">
+                    <div class="flex my-3 justify-evenly w-full">
+                        <div class="w-1/3">
+                            <Label for="disk-type" class="block text-base mb-2"
+                                >Disk Type</Label
+                            >
+                            <Input
+                                id="disk-type"
+                                bind:value={diskType}
+                                placeholder="file"
+                            />
+                        </div>
+                        <div class="w-1/3">
+                            <Label
+                                for="disk-device"
+                                class="block text-base mb-2">Disk Device</Label
+                            >
+                            <Input
+                                id="disk-device"
+                                bind:value={diskDevice}
+                                placeholder="disk"
+                            />
+                        </div>
+                    </div>
+                    <div class="flex my-3 justify-evenly w-full">
+                        <div class="w-1/3">
+                            <Label for="path" class="block text-base mb-2"
+                                >Path</Label
+                            >
+                            <Input
+                                id="path"
+                                bind:value={path}
+                                placeholder="/var/lib/libvirt/random.img"
+                            />
+                        </div>
+                        <div class="w-1/3">
+                            <Label for="target" class="block text-base mb-2"
+                                >Target</Label
+                            >
+                            <Input
+                                id="target"
+                                bind:value={target}
+                                placeholder="vdb"
+                            />
+                        </div>
+                    </div>
+                </form>
+                <svelte:fragment slot="footer">
+                    <Button color="green" on:click={attach}>Attach</Button>
+                    <Button color="red" on:click={detach}>Detach</Button>
+                </svelte:fragment>
+            </Modal>
         {/if}
     </div>
 </div>
