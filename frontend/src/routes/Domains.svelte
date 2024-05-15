@@ -4,7 +4,11 @@
     import { Domains, Connected } from "../../wailsjs/go/app/App";
     import { domain } from "../../wailsjs/go/models";
     import { Button, P } from "flowbite-svelte";
-    import { ArrowRightOutline } from "flowbite-svelte-icons";
+    import {
+        ArrowRightOutline,
+        CirclePlusOutline,
+        RefreshOutline,
+    } from "flowbite-svelte-icons";
     import Domain from "../components/Domain.svelte";
     import { getNotificationsContext } from "svelte-notifications";
 
@@ -61,8 +65,12 @@
             {/each}
         </div>
         <div class="justify-start">
-            <Button class="mx-1" on:click={create}>Create</Button>
-            <Button class="mx-1" on:click={reloadDomains}>Refresh</Button>
+            <Button class="mx-1" color="green" on:click={create}>
+                <CirclePlusOutline class="w-6 h-6" />
+            </Button>
+            <Button class="mx-1" color="light" on:click={reloadDomains}>
+                <RefreshOutline class="w-6 h-6" />
+            </Button>
         </div>
     {:else}
         <P class="mb-6 text-center text-white" size="xl"

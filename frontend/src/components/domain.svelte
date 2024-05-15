@@ -143,10 +143,12 @@
             <Button class="mx-1" color="red" on:click={destroy}>Destroy</Button>
         {/if}
         {#if status === "Running"}
-            <Button class="!p-2 mx-1" on:click={() => (diskModal = true)}
+            <Button
+                class="!p-2 mx-1"
+                color="light"
+                on:click={() => (diskModal = true)}
                 ><FloppyDiskSolid class="w-6 h-6" /></Button
             >
-
             <Modal
                 title="Disk Management"
                 size="lg"
