@@ -40,8 +40,8 @@
             <Label for="hypervisor-uri" class="block text-lg text-white mb-2"
                 >Hypervisor URI</Label
             >
-            <div class="flex-row content-center">
-                <ButtonGroup class="w-2/5">
+            <div class="flex content-center justify-center">
+                <ButtonGroup class="w-2/5 mx-2">
                     <InputAddon>
                         <ServerOutline
                             class="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -53,7 +53,7 @@
                         placeholder="qemu:///system"
                     />
                 </ButtonGroup>
-                <Button on:click={connect}>Connect</Button>
+                <Button class="mx-2" on:click={connect}>Connect</Button>
             </div>
         </form>
     </div>

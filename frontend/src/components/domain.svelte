@@ -1,18 +1,23 @@
 <script lang="ts">
-    import { Button } from "flowbite-svelte";
+    import { Button, Modal } from "flowbite-svelte";
     import {
         Start,
         Resume,
         Suspend,
         Shutdown,
         Destroy,
+        AttachDevice,
+        DetachDevice,
     } from "../../wailsjs/go/app/App";
     import { createEventDispatcher } from "svelte";
     import { getNotificationsContext } from "svelte-notifications";
+    import { FloppyDiskSolid } from "flowbite-svelte-icons";
+    import DiskModal from "./DiskModal.svelte";
 
     const { addNotification } = getNotificationsContext();
     const dispatch = createEventDispatcher();
 
+    let diskModal = false;
     export let name: string;
     export let status: string;
     async function start() {
@@ -93,17 +98,26 @@
             Status: <b>{status}</b>
         </div>
     </div>
-    <div>
+    <div class="flex items-center justify-evenly">
         {#if status === "Shutoff"}
-            <Button color="green" on:click={start}>Start</Button>
+            <Button class="mx-1" color="green" on:click={start}>Start</Button>
         {/if}
         {#if status === "Paused"}
-            <Button color="green" on:click={resume}>Resume</Button>
+            <Button class="mx-1" color="green" on:click={resume}>Resume</Button>
         {/if}
         {#if status === "Running"}
-            <Button color="yellow" on:click={suspend}>Suspend</Button>
-            <Button on:click={shutdown}>Shutdown</Button>
-            <Button color="red" on:click={destroy}>Destroy</Button>
+            <Button class="mx-1" color="yellow" on:click={suspend}
+                >Suspend</Button
+            >
+            <Button class="mx-1" on:click={shutdown}>Shutdown</Button>
+            <Button class="mx-1" color="red" on:click={destroy}>Destroy</Button>
+        {/if}
+
+        {#if status === "Running"}
+            <Button class="!p-2 mx-1" on:click={() => (diskModal = true)}
+                ><FloppyDiskSolid class="w-6 h-6" /></Button
+            >
+            <DiskModal domain={name} {diskModal} />
         {/if}
     </div>
 </div>

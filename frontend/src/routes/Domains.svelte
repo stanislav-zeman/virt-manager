@@ -61,8 +61,8 @@
             {/each}
         </div>
         <div class="justify-start">
-            <Button on:click={create}>Create</Button>
-            <Button on:click={reloadDomains}>Refresh</Button>
+            <Button class="mx-1" on:click={create}>Create</Button>
+            <Button class="mx-1" on:click={reloadDomains}>Refresh</Button>
         </div>
     {:else}
         <P class="mb-6 text-center text-white" size="xl"
