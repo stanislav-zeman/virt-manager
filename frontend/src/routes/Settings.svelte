@@ -37,22 +37,24 @@
 <Window heading="Settings">
     <div class="flex-col">
         <form class="flex-col">
-            <Label for="hypervisor-uri" class="block text-white mb-2"
+            <Label for="hypervisor-uri" class="block text-lg text-white mb-2"
                 >Hypervisor URI</Label
             >
-            <ButtonGroup class="w-2/5">
-                <InputAddon>
-                    <ServerOutline
-                        class="w-4 h-4 text-gray-500 dark:text-gray-400"
+            <div class="flex-row content-center">
+                <ButtonGroup class="w-2/5">
+                    <InputAddon>
+                        <ServerOutline
+                            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                        />
+                    </InputAddon>
+                    <Input
+                        id="hypervisor-uri"
+                        bind:value={hypervisorUri}
+                        placeholder="qemu:///system"
                     />
-                </InputAddon>
-                <Input
-                    id="hypervisor-uri"
-                    bind:value={hypervisorUri}
-                    placeholder="qemu:///system"
-                />
-            </ButtonGroup>
-            <Button on:click={connect}>Connect</Button>
+                </ButtonGroup>
+                <Button on:click={connect}>Connect</Button>
+            </div>
         </form>
     </div>
 </Window>

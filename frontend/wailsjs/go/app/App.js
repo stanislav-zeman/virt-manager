@@ -10,10 +10,6 @@ export function Connected() {
   return window['go']['app']['App']['Connected']();
 }
 
-export function Create(arg1, arg2, arg3) {
-  return window['go']['app']['App']['Create'](arg1, arg2, arg3);
-}
-
 export function Destroy(arg1) {
   return window['go']['app']['App']['Destroy'](arg1);
 }
@@ -28,6 +24,10 @@ export function Resume(arg1) {
 
 export function Shutdown(arg1) {
   return window['go']['app']['App']['Shutdown'](arg1);
+}
+
+export function Start(arg1) {
+  return window['go']['app']['App']['Start'](arg1);
 }
 
 export function Suspend(arg1) {

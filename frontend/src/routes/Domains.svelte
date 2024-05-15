@@ -4,6 +4,7 @@
     import { Domains, Connected } from "../../wailsjs/go/app/App";
     import { domain } from "../../wailsjs/go/models";
     import { Button, P } from "flowbite-svelte";
+    import { ArrowRightOutline } from "flowbite-svelte-icons";
     import Domain from "../components/Domain.svelte";
     import { getNotificationsContext } from "svelte-notifications";
 
@@ -14,6 +15,13 @@
     async function reloadDomains() {
         try {
             domains = await Domains();
+            console.log(domains);
+            addNotification({
+                text: "Reloaded domains",
+                position: "bottom-right",
+                type: "info",
+                removeAfter: 3000,
+            });
         } catch (error) {
             addNotification({
                 text: "Failed retrieving domain data",
@@ -22,6 +30,15 @@
                 removeAfter: 5000,
             });
         }
+    }
+
+    async function create() {
+        addNotification({
+            text: "Not yet implemented",
+            position: "bottom-right",
+            type: "warn",
+            removeAfter: 5000,
+        });
     }
 
     onMount(async () => {
@@ -36,13 +53,24 @@
     {#if connected}
         <div>
             {#each domains as d}
-                <Domain name={d.name} status={d.status} />
+                <Domain
+                    name={d.name}
+                    status={d.status}
+                    on:domain-changed={reloadDomains}
+                />
             {/each}
         </div>
         <div class="justify-start">
-            <Button on:click{reloadDomains}>Refresh</Button>
+            <Button on:click={create}>Create</Button>
+            <Button on:click={reloadDomains}>Refresh</Button>
         </div>
     {:else}
-        <P class="text-center text-white" size="xl">You are not connected!</P>
+        <P class="mb-6 text-center text-white" size="xl"
+            >You are not connected!</P
+        >
+        <Button href="#/settings">
+            Settings
+            <ArrowRightOutline class="w-6 h-6 ms-2" />
+        </Button>
     {/if}
 </Window>

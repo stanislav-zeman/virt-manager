@@ -50,31 +50,14 @@ func (f *Facade) Domains() ([]domain.Domain, error) {
 	return apiDomains, nil
 }
 
-func (f *Facade) Create(domainName string, vCPUs uint, memory uint64) error {
-	domain := libvirt.Domain{}
-	err := domain.Rename(domainName, 0)
+func (f *Facade) Start(domainName string) error {
+	domain, err := f.conn.LookupDomainByName(domainName)
 	if err != nil {
 		return err
 	}
 
-	err = domain.SetVcpus(vCPUs)
-	if err != nil {
-		return err
-	}
-
-	err = domain.SetMemory(memory)
-	if err != nil {
-		return err
-	}
-
-	flags := libvirt.DomainCreateFlags(0)
-	err = domain.CreateWithFlags(flags)
-	if err != nil {
-		return err
-	}
-
-	domain.Free()
-	return nil
+	defer domain.Free()
+	return domain.Create()
 }
 
 func (f *Facade) Resume(domainName string) error {

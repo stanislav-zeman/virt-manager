@@ -73,22 +73,83 @@ func (a *App) Connected() bool {
 	return connected
 }
 
-func (a *App) Create(domainName string, vCPUs uint, memory uint64) error {
-	return a.lv.Create(domainName, vCPUs, memory)
+func (a *App) Start(domainName string) error {
+	err := a.lv.Start(domainName)
+	if err != nil {
+		a.log.Error("failed starting domain",
+			zap.Error(err),
+			zap.String("name", domainName),
+		)
+		return err
+	}
+
+	a.log.Info("started domain",
+		zap.String("name", domainName),
+	)
+	return nil
+
 }
 
 func (a *App) Suspend(domainName string) error {
-	return a.lv.Suspend(domainName)
+	err := a.lv.Suspend(domainName)
+	if err != nil {
+		a.log.Error("failed suspending domain",
+			zap.Error(err),
+			zap.String("name", domainName),
+		)
+		return err
+	}
+
+	a.log.Info("suspended domain",
+		zap.String("name", domainName),
+	)
+	return nil
 }
 
 func (a *App) Resume(domainName string) error {
-	return a.lv.Resume(domainName)
+	err := a.lv.Resume(domainName)
+	if err != nil {
+		a.log.Error("failed resuming domain",
+			zap.Error(err),
+			zap.String("name", domainName),
+		)
+		return err
+	}
+
+	a.log.Info("resumed domain",
+		zap.String("name", domainName),
+	)
+	return nil
 }
 
 func (a *App) Shutdown(domainName string) error {
-	return a.lv.Destroy(domainName)
+	err := a.lv.Shutdown(domainName)
+	if err != nil {
+		a.log.Error("failed shutdowning domain",
+			zap.Error(err),
+			zap.String("name", domainName),
+		)
+		return err
+	}
+
+	a.log.Info("shutdowned domain",
+		zap.String("name", domainName),
+	)
+	return nil
 }
 
 func (a *App) Destroy(domainName string) error {
-	return a.lv.Destroy(domainName)
+	err := a.lv.Destroy(domainName)
+	if err != nil {
+		a.log.Error("failed destroying domain",
+			zap.Error(err),
+			zap.String("name", domainName),
+		)
+		return err
+	}
+
+	a.log.Info("destroyed domain",
+		zap.String("name", domainName),
+	)
+	return nil
 }
