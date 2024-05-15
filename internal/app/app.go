@@ -160,14 +160,20 @@ func (a *App) AttachDevice(domainName, diskType, diskDevice, path, target string
 		a.log.Error("failed attaching device",
 			zap.Error(err),
 			zap.String("name", domainName),
+			zap.String("type", diskType),
+			zap.String("device", diskDevice),
 			zap.String("path", path),
+			zap.String("target", target),
 		)
 		return err
 	}
 
 	a.log.Info("attached device",
 		zap.String("name", domainName),
+		zap.String("type", diskType),
+		zap.String("device", diskDevice),
 		zap.String("path", path),
+		zap.String("target", target),
 	)
 	return nil
 }
@@ -178,14 +184,21 @@ func (a *App) DetachDevice(domainName, diskType, diskDevice, path, target string
 		a.log.Error("failed detaching device",
 			zap.Error(err),
 			zap.String("name", domainName),
+			zap.String("type", diskType),
+			zap.String("device", diskDevice),
 			zap.String("path", path),
+			zap.String("target", target),
 		)
 		return err
 	}
 
 	a.log.Info("detached device",
+		zap.Error(err),
 		zap.String("name", domainName),
+		zap.String("type", diskType),
+		zap.String("device", diskDevice),
 		zap.String("path", path),
+		zap.String("target", target),
 	)
 	return nil
 }
