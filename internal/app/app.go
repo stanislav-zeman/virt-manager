@@ -153,3 +153,39 @@ func (a *App) Destroy(domainName string) error {
 	)
 	return nil
 }
+
+func (a *App) AttachDevice(domainName, diskType, diskDevice, path, target string) error {
+	err := a.lv.AttachDevice(domainName, diskType, diskDevice, path, target)
+	if err != nil {
+		a.log.Error("failed attaching device",
+			zap.Error(err),
+			zap.String("name", domainName),
+			zap.String("path", path),
+		)
+		return err
+	}
+
+	a.log.Info("attached device",
+		zap.String("name", domainName),
+		zap.String("path", path),
+	)
+	return nil
+}
+
+func (a *App) DetachDevice(domainName, diskType, diskDevice, path, target string) error {
+	err := a.lv.DetachDevice(domainName, diskType, diskDevice, path, target)
+	if err != nil {
+		a.log.Error("failed detaching device",
+			zap.Error(err),
+			zap.String("name", domainName),
+			zap.String("path", path),
+		)
+		return err
+	}
+
+	a.log.Info("detached device",
+		zap.String("name", domainName),
+		zap.String("path", path),
+	)
+	return nil
+}

@@ -1,6 +1,7 @@
 package libvirt
 
 import (
+	"encoding/xml"
 	"fmt"
 
 	"github.com/stanislav-zeman/virt-manager/internal/domain"
@@ -98,4 +99,75 @@ func (f *Facade) Destroy(domainName string) error {
 
 	defer domain.Free()
 	return domain.Destroy()
+}
+
+func (f *Facade) AttachDevice(domainName, diskType, diskDevice, sourcePath, targetDevice string) error {
+	d, err := f.conn.LookupDomainByName(domainName)
+	if err != nil {
+		return err
+	}
+
+	defer d.Free()
+	device := domain.Disk{
+		Type:   diskType,
+		Device: diskDevice,
+		Driver: domain.Driver{
+			Name:  "qemu",
+			Type:  "raw",
+			Cache: "none",
+		},
+		Source: domain.Source{
+			File: sourcePath,
+		},
+		Target: domain.Target{
+			Dev: targetDevice,
+		},
+	}
+	bytes, err := xml.Marshal(device)
+	if err != nil {
+		return err
+	}
+
+	err = d.AttachDevice(string(bytes))
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}
+
+func (f *Facade) DetachDevice(domainName, diskType, diskDevice, sourcePath, targetDevice string) error {
+	d, err := f.conn.LookupDomainByName(domainName)
+	if err != nil {
+		return err
+	}
+
+	defer d.Free()
+	device := domain.Disk{
+		Type:   diskType,
+		Device: diskDevice,
+		Driver: domain.Driver{
+			Name:  "qemu",
+			Type:  "raw",
+			Cache: "none",
+		},
+		Source: domain.Source{
+			File: sourcePath,
+		},
+		Target: domain.Target{
+			Dev: targetDevice,
+		},
+	}
+	bytes, err := xml.Marshal(device)
+	if err != nil {
+		return err
+	}
+
+	err = d.DetachDevice(string(bytes))
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
